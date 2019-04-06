@@ -228,8 +228,10 @@ class DBImpl : public DB {
   virtual Status Flush(const FlushOptions& options,
                        ColumnFamilyHandle* column_family) override;
   virtual Status FlushWAL(bool sync) override;
-  bool TEST_WALBufferIsEmpty();
+  bool TEST_WALBufferIsEmpty(bool lock = true);
   virtual Status SyncWAL() override;
+  virtual Status LockWAL() override;
+  virtual Status UnlockWAL() override;
 
   virtual SequenceNumber GetLatestSequenceNumber() const override;
   // REQUIRES: joined the main write queue if two_write_queues is disabled, and
